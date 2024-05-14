@@ -4,7 +4,14 @@ import { Row } from "./components/Row";
 function App() {
   return (
     <div className="App">
-      <Row fetchUrl={requests.fetchTopRated} />
+      {requests.map((request) => (
+        <Row
+          key={request.title}
+          title={request.title}
+          fetchUrl={request.fetchUrl}
+          isLargeRow={request.isLargeRow}
+        />
+      ))}
     </div>
   );
 }
