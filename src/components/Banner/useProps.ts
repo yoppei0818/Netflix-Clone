@@ -28,7 +28,8 @@ export const useProps = () => {
       return "";
     }
     // ...を追加するためにn-2をしている
-    return str.length > n ? str.substring(0, n - 2) + "..." : str;
+    // TODO n-4じゃないのか？
+    return str.length > n ? str.substring(0, n - 4) + "..." : str;
   };
 
   return {
