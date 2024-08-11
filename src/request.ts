@@ -49,3 +49,6 @@ export const requests: Request[] = [
     isLargeRow: false,
   },
 ];
+
+export const fetchMovieVideos = (movieId: string) =>
+  `/tv/${movieId}/videos?api_key=${API_KEY}`;

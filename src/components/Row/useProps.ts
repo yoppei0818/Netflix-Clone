@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { instance } from "../../axios";
 import { Movie } from "../../type";
+import { fetchMovieVideos } from "../../request";
 
 export const useProps = (fetchUrl: string) => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [trailerUrl, setTrailerUrl] = useState<string | null>("");
 
   useEffect(() => {
     async function fetchData() {
@@ -21,5 +23,18 @@ export const useProps = (fetchUrl: string) => {
     fetchData();
   }, [fetchUrl]);
 
-  return movies;
+  const handleClick = async (movie: Movie) => {
+    if (trailerUrl) {
+      setTrailerUrl("");
+    } else {
+      const moviePlayUrl = await instance.get(fetchMovieVideos(movie.id));
+      setTrailerUrl(moviePlayUrl.data.results[0]?.key);
+    }
+  };
+
+  return {
+    movies,
+    trailerUrl,
+    handleClick,
+  };
 };
